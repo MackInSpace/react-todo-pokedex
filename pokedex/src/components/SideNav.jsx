@@ -1,6 +1,6 @@
 import { first151Pokemon, getFullPokedexNumber } from '../utils/index';
 
-export function SideNav() {
+export default function SideNav() {
 
 
     return (
