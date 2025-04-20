@@ -60,7 +60,6 @@ export default function PokeCard(props) {
     useEffect(() => {
         // if loading, exit loop
         if (loading || !localStorage) { return }
-
         // check if the selected pokemon info is available in teh cache
         //1. define the cache
         let cache = {}
@@ -72,9 +71,9 @@ export default function PokeCard(props) {
         if (selectedPokemon in cache) {
             //read from the cache
             setData(cache[selectedPokemon])
+            console.log ('Found pokemon in cache')
             return
         }
-
         // we passed all the cache, no avail, fetch data from the api
 
         async function fetchPokemonData() {
@@ -112,6 +111,18 @@ export default function PokeCard(props) {
 
     return (
         <div className="poke-card">
+            {skill && (
+                <Modal handleCloseModal={() => setSkill(null)}>
+                    <div>
+                        <h6>Name</h6>
+                        <h2 className="skill-name">{skill.name.replaceAll('-', ' ')}</h2>
+                    </div>
+                    <div>
+                        <h6>Description</h6>
+                        <p>{skill.description}</p>
+                    </div>
+                </Modal>
+            )}
             <div>
                 <h4>#{getFullPokedexNumber(selectedPokemon)}</h4>
                 <h2>{name}</h2>
