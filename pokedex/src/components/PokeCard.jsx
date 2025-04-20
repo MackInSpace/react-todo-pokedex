@@ -141,7 +141,7 @@ export default function PokeCard(props) {
                 {imgList.map((spriteUrl, spriteIndex)=> {
                     const imgUrl = sprites[spriteUrl]
                     return (
-                        <img key={spriteIndex} src={''} alt={`${name}
+                        <img key={spriteIndex} src={imgUrl} alt={`${name}
                         -img-${spriteUrl}`} />
                     )
                 })}
@@ -163,7 +163,9 @@ export default function PokeCard(props) {
                 {moves.map((moveObj, moveIndex) => {
                     return (
                         <button className='button-card pokemon-move'
-                            key={moveIndex} onClick={() => { }}>
+                            key={moveIndex} onClick={() => {
+                                fetchMoveData(moveObj?.move?.name, moveObj?.move?.url)
+                             }}>
                                 <p>{moveObj?.move?.name.replaceAll(
                                     '-', ' ')}
                                 </p>
