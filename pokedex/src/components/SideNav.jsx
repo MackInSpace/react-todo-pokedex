@@ -25,11 +25,22 @@ export default function SideNav(props) {
                 </button>
                 <h1 className="text-gradient">Pokédex</h1>
             </div>
-            <input />
-            {first151Pokemon.map((pokemon, pokemonIndex) => {
+            <input 
+                placeholder='E.g 001 or Bulba...' 
+                value={searchValue} 
+                onChange={(e) => {setSearchValue(e.target.value)}}
+            />
+            {filteredPokemon.map((pokemon, pokemonIndex) => {
+                const truePokedexNumber = first151Pokemon.indexOf(pokemon)
                 return (
-                    <button key={pokemonIndex} className='nav-card'>
-                        <p>{getFullPokedexNumber(pokemonIndex)}</p>
+                    <button onClick={ () => {
+                        setSelectedPokemon(truePokedexNumber)
+                        handleCloseMenu()
+                        }}
+                            key={pokemonIndex} 
+                            className={'nav-card' + (pokemonIndex === selectedPokemon ? ' nav-card-selected' : '')}
+                    >
+                        <p>{getFullPokedexNumber(truePokedexNumber)}</p>
                         <p>{pokemon}</p>
                     </button>
                 )
